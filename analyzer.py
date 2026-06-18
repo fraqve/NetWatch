@@ -136,11 +136,3 @@ def analyze_pcap_DNS(packets:PacketList,data:dict) -> dict:
             except AttributeError: # If itis an answer we skip it
                 pass
     return data         
-
-                
-data = init_data()
-
-file = load_pcap("dns-tcp.pcap")
-data = analyze_pcap_IP(file,data)
-print(analyze_pcap_DNS(file,data))
-            
