@@ -45,7 +45,7 @@ def analyze_pcap_IP(pac:scapy.Packet, data:dict) -> dict: # Note this func shoul
 
 
 def analyze_pcap_ICMP(pac:scapy.Packet,data:dict) -> dict:
-    if "ICMP" in pac:
+    if "ICMP" in pac and "IP" in pac: # i realized there is IPv6 which maybe doesnt have the IP layer thats why we check to prevet keyerros
         # Grabbing the source and destination ip from the packet
         src_ip = pac["IP"].src
         dst_ip = pac["IP"].dst
@@ -71,7 +71,7 @@ def analyze_pcap_ICMP(pac:scapy.Packet,data:dict) -> dict:
 
 
 def analyze_pcap_TCP(pac:scapy.Packet,data:dict) -> dict:
-    if "TCP" in pac:
+    if "TCP" in pac and "IP" in pac:
         src_ip = pac["IP"].src
         flags_ip = pac["TCP"].flags
         port = pac["TCP"].dport
@@ -85,7 +85,7 @@ def analyze_pcap_TCP(pac:scapy.Packet,data:dict) -> dict:
 
 
 def analyze_pcap_UDP(pac:scapy.Packet,data:dict) -> dict:
-    if "UDP" in pac:
+    if "UDP" in pac and "IP" in pac:
         src_ip = pac["IP"].src
         port = pac["UDP"].dport
 
@@ -98,7 +98,7 @@ def analyze_pcap_UDP(pac:scapy.Packet,data:dict) -> dict:
 
 
 def analyze_pcap_DNS(pac:scapy.Packet,data:dict) -> dict:
-    if "DNS" in pac:
+    if "DNS" in pac and "IP" in pac:
         src_ip = pac["IP"].src
 
         try: # DNS query might not be present if it is an answer
@@ -111,5 +111,4 @@ def analyze_pcap_DNS(pac:scapy.Packet,data:dict) -> dict:
 
         except AttributeError: # If it is an answer we skip it
             pass
-    return data         
-
+    return data    
