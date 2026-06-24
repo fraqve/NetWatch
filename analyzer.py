@@ -78,9 +78,11 @@ def analyze_pcap_TCP(pac:scapy.Packet,data:dict) -> dict:
 
         # Checking if the flag of packet is SYN
         if "S" in flags_ip:
+            if port <=  32768: # This filters out dynamic ports
                 # checking if port already exists
                 if port not in data["IPs"][src_ip]["TCP_ports_scanned"]:
                     data["IPs"][src_ip]["TCP_ports_scanned"].append(port)
+
     return data
 
 
@@ -88,10 +90,10 @@ def analyze_pcap_UDP(pac:scapy.Packet,data:dict) -> dict:
     if "UDP" in pac and "IP" in pac:
         src_ip = pac["IP"].src
         port = pac["UDP"].dport
-
-        # checking if port already exists
-        if port not in data["IPs"][src_ip]["UDP_ports_scanned"]:
-            data["IPs"][src_ip]["UDP_ports_scanned"].append(port)
+        if port <=  32768: # This filters out dynamic ports
+            # checking if port already exists
+            if port not in data["IPs"][src_ip]["UDP_ports_scanned"]:
+                data["IPs"][src_ip]["UDP_ports_scanned"].append(port)
 
     return data
            
