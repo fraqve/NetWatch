@@ -40,7 +40,7 @@ def assess_TCP(data:dict,ip:str,config:dict,threat:dict) -> dict:
             "points":0,
             "risk_factors":[]
         }
-    # Getting how much unique ports the mahcine scanned
+    # Getting how much unique ports the machine scanned
     TCP_ports_count = len(data["IPs"][ip]["TCP_ports_scanned"])
     result = max(0,((TCP_ports_count - config["TCP_tolerance"]) * config["TCP_risk_factor"]))
 
