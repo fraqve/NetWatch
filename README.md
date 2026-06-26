@@ -37,7 +37,6 @@ The judgment side (`assess.py`) is in progress now:
 
 - **ICMP assessment is written, but I haven't tested it against real data yet.** The logic: ping sweeps and unreachable floods scale in points the further they go past a free threshold, and a detected redirect instantly pushes the score past the flagging threshold on its own, since that's an active attack, not just reconnaissance. It returns the score, a flagged/not-flagged verdict, and a list of which specific behaviors contributed, so the result can actually explain itself instead of just spitting out a number.
 - TCP, UDP, and DNS judgment logic isn't built yet.
-- 
 - One small inconsistency I haven't cleaned up yet: analyze_pcap_IP still builds a new IP's profile through the shared init_data function, while every other protocol function has moved to defaulting its own keys directly with setdefault(). Not a bug, just a leftover from before I made that pattern consistent — small TODO, not a blocker.
 
 ## Config system
