@@ -14,5 +14,6 @@
     "risk_thershold_ICMP": 15,
     "risk_thershold_TCP": 15,
     "risk_thershold_UDP": 15,
-    "risk_thershold_DNS": 15
+    "risk_thershold_DNS": 15,
+    "abuseipdb_api_key": "YOUR_API_KEY_HERE"
 }
